@@ -29,7 +29,7 @@ const SigninForm: React.FC = () => {
       const responseData = await response.json();
       localStorage.setItem('authToken', responseData.token);
       localStorage.setItem('userData', JSON.stringify(responseData.user));
-      navigate('/account');
+      navigate('/dashboard');
     } catch (error) {
       console.error('Sign-in failed:', error);
       //setError('submit', { message: 'Sign-in failed. Please check your credentials.' });
@@ -48,7 +48,7 @@ const SigninForm: React.FC = () => {
         <input id="password" type="password" {...register('password', { required: 'Password is required' })} className="w-full border rounded-md py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:border-blue-500 focus:shadow-outline-blue" />
         {errors.password && <p className="text-red-500">{errors.password.message}</p>}
       </div>
-      <button type="submit" className="w-full bg-gray-700 hover:bg-gray-800 text-white font-semibold py-2 px-4 rounded-md focus:outline-none focus:shadow-outline-gray mt-4">Sign In</button>
+      <button type="submit" className="w-full bg-gray-700 hover:bg-gray-800 text-white font-semibold py-2 px-4 rounded-md focus:outline-none focus:shadow-outline-gray mt-4 mb-4">Sign In</button>
       {errors.root && <p className="text-red-500">{errors.root?.message}</p>}
     </form>
   );
