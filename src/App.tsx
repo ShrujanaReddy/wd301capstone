@@ -4,10 +4,9 @@ import router from "./routes"
 import { ThemeContext } from "./context/theme";
 
 const App = () => {
-  const currentTheme = useContext(ThemeContext)
-
+  const { theme } = useContext(ThemeContext)
   return (
-    <div>
+    <div className={`h-screen w-screen mx-auto py-2 ${theme === "dark" ? "dark" : ""}`}>
       <RouterProvider router={router} />
     </div>
   );
