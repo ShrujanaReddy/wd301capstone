@@ -1,5 +1,5 @@
 import { API_ENDPOINT } from '../../config/constants';
-
+import {Match} from './reducer';
 export const fetchMatches = async (dispatch: any) => {
   try {
     dispatch({ type: "FETCH_MATCHES_REQUEST" });
@@ -14,6 +14,11 @@ export const fetchMatches = async (dispatch: any) => {
 
     const data = await response.json();
     dispatch({ type: "FETCH_MATCHES_SUCCESS", payload: data.matches });
+
+    // Fetch match details for each match
+    data.matches.forEach((match: Match) => {
+      fetchMatchDetails(dispatch, match.id);
+    });
   } catch (error) {
     console.error('Error fetching matches:', error);
     dispatch({ type: "FETCH_MATCHES_FAILURE", payload: 'Unable to load matches' });
@@ -33,7 +38,7 @@ export const fetchMatchDetails = async (dispatch: any, matchId: number) => {
     }
 
     const data = await response.json();
-    dispatch({ type: "FETCH_MATCH_SUCCESS", payload: data.matches });
+    dispatch({ type: "FETCH_MATCH_SUCCESS", payload: data });
   } catch (error) {
     console.error('Error fetching match details:', error);
     dispatch({ type: "FETCH_MATCH_FAILURE", payload: 'Unable to load match details' });

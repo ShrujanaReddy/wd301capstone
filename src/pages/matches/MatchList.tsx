@@ -9,7 +9,7 @@ const MatchList: React.FC = () => {
   useEffect(() => {
     fetchMatches(dispatch);
   }, [dispatch]);
-  
+
   return (
     <div className="grid gap-4 grid-cols-4 mt-5">
           <MatchListItems />
