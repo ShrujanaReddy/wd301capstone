@@ -3,6 +3,7 @@ interface Match {
   name: string;
   location: string;
   sportName: string;
+  isRunning: boolean;
 }
 
 export interface MatchesState {
@@ -23,8 +24,6 @@ export type MatchesActions =
   | { type: "FETCH_MATCHES_REQUEST" }
   | { type: "FETCH_MATCHES_SUCCESS"; payload: Match[] }
   | { type: "FETCH_MATCHES_FAILURE"; payload: string }
-  | { type: "ADD_MATCHES_SUCCESS"; payload: Match }
-  | { type: "REMOVE_MATCHES_SUCCESS"; payload: number };
 
 export const reducer = (
   state: MatchesState = initialState,
@@ -48,13 +47,6 @@ export const reducer = (
         isLoading: false,
         isError: true,
         errorMessage: action.payload,
-      };
-    case "ADD_MATCHES_SUCCESS":
-      return { ...state, matches: [...state.matches, action.payload] };
-    case "REMOVE_MATCHES_SUCCESS":
-      return {
-        ...state,
-        matches: state.matches.filter((match) => match.id !== action.payload),
       };
     default:
       return state;
