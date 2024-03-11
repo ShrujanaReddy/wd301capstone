@@ -1,5 +1,6 @@
 import { API_ENDPOINT } from '../../config/constants';
-import {Article} from './reducer';
+import { Article } from './reducer';
+
 export const fetchArticles = async (dispatch: any) => {
   try {
     dispatch({ type: "FETCH_ARTICLES_REQUEST" });
@@ -15,9 +16,9 @@ export const fetchArticles = async (dispatch: any) => {
     const data = await response.json();
     dispatch({ type: "FETCH_ARTICLES_SUCCESS", payload: data });
 
-    // Fetch match details for each match
+    // Fetch article details for each article
     data.forEach((article: Article) => {
-      fetchArticleDetails(dispatch, data.id);
+      fetchArticleDetails(dispatch, article.id);
     });
   } catch (error) {
     console.error('Error fetching articles:', error);
@@ -28,7 +29,7 @@ export const fetchArticles = async (dispatch: any) => {
 export const fetchArticleDetails = async (dispatch: any, articleId: number) => {
   try {
     dispatch({ type: "FETCH_ARTICLE_REQUEST" });
-    const response = await fetch(`${API_ENDPOINT}/matches/${articleId}`, {
+    const response = await fetch(`${API_ENDPOINT}/articles/${articleId}`, {
       method: 'GET',
       headers: { 'Content-Type': 'application/json' },
     });
