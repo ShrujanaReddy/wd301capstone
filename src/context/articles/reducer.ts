@@ -11,6 +11,7 @@ export interface Article {
   date: string;
   summary: string;
   teams: { id: number; name: string }[]; 
+  content: string;
 }
 
 export interface ArticlesState {
