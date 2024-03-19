@@ -11,8 +11,10 @@ const ArticleList: React.FC = () => {
   }, [dispatch]);
 
   return (
-    <div className="grid gap-4 grid-cols-4 mt-5">
-          <ArticleListItems />
+    <div className="w-3/4 bg-gray-300 rounded-2xl">
+      <div>
+        <ArticleListItems />
+      </div>
     </div>
   );
 };
