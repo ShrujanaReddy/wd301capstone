@@ -48,16 +48,19 @@ const ArticleListItems = () => {
           <h5 className="text-xl font-bold tracking-tight text-gray-800 dark:text-white">
             {article.title}
           </h5>
-          <img
-            src={article.thumbnail}
-            alt={article.title}
-            className="w-full h-auto mt-2 mb-4 rounded-lg"
-          />
-          <p className="text-sm text-gray-700 dark:text-gray-300">
+          <div className="relative w-full h-40 overflow-hidden rounded-lg">
+            <img
+              src={article.thumbnail}
+              alt={article.title}
+              className="absolute top-0 left-0 w-full h-full object-cover rounded-lg"
+            />
+          </div>
+          <p className="text-sm text-gray-700 dark:text-gray-300 overflow-hidden overflow-ellipsis h-16">
             {article.summary}
           </p>
         </div>
       ))}
+
 
       <Transition appear show={isOpen} as={Fragment}>
         <Dialog as="div" className="overflow-y-auto max-h-[80vh]" onClose={closeModal}>
@@ -84,6 +87,26 @@ const ArticleListItems = () => {
                 leaveTo="opacity-0 scale-95"
               >
                 <Dialog.Panel className="w-full max-w-md transform overflow-hidden rounded-2xl bg-white p-6 text-left align-middle shadow-xl transition-all overflow-y-auto max-h-[80vh]">
+                  <button
+                    type="button"
+                    onClick={closeModal}
+                    className="absolute top-2 right-2 text-gray-500 hover:text-gray-700 focus:outline-none z-50"
+                  >
+                    <svg
+                      xmlns="http://www.w3.org/2000/svg"
+                      className="h-6 w-6"
+                      fill="none"
+                      viewBox="0 0 24 24"
+                      stroke="currentColor"
+                    >
+                      <path
+                        strokeLinecap="round"
+                        strokeLinejoin="round"
+                        strokeWidth={2}
+                        d="M6 18L18 6M6 6l12 12"
+                      />
+                    </svg>
+                  </button>
                   <Dialog.Title
                     as="h3"
                     className="text-lg font-medium leading-6 text-gray-900"
