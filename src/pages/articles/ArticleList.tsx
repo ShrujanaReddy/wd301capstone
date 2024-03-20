@@ -13,6 +13,7 @@ const ArticleList: React.FC = () => {
   return (
     <div className="w-3/4 bg-gray-300 rounded-2xl">
       <div>
+        <br/>
         <ArticleListItems />
       </div>
     </div>
