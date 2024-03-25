@@ -87,9 +87,9 @@ const Filters = () => {
   return (
     <>
         <div className="flex-1 bg-gray-200">
-          <div className="flex flex-col gap-4">
-            <div className="flex flex-col gap-4">
-              <label htmlFor="sport" className="block text-sm font-medium text-gray-700">Sport</label>
+        <div className='text-xl font-bold mb-2 text-center'>Favourites</div>
+          <div className="flex flex-col gap-2">
+              <label className="block text-sm font-medium text-gray-700">Sport</label>
               <select
                 id="sport"
                 name="sport"
@@ -104,7 +104,7 @@ const Filters = () => {
               </select>
               {selectedSport !== 'All' && (
                 <div>
-                  <label htmlFor="team" className="block text-sm font-medium text-gray-700">Team</label>
+                  <label className="block text-sm font-medium text-gray-700 mb-2">Team</label>
                   <select
                     id="team"
                     name="team"
@@ -125,7 +125,6 @@ const Filters = () => {
                 <FilteredArticleCard key={article.id} article={article} openModal={openModal} />
               ))}
             </div>
-          </div>
         </div>
 
       {selectedArticle && (

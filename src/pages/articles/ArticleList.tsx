@@ -12,8 +12,8 @@ const ArticleList: React.FC = () => {
   }, [dispatch]);
 
   return (
-    <div className="grid grid-cols-3 gap-4 mr-4">
-      <div className="col-span-2 bg-gray-200 rounded-2xl p-4">
+    <div className="grid grid-cols-4 gap-4 mr-4">
+      <div className="col-span-3 bg-gray-200 rounded-2xl p-4">
         <ArticleListItems/>
       </div>
       <div className="bg-gray-200 rounded-2xl p-4">
