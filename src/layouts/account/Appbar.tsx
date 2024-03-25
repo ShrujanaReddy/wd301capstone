@@ -1,6 +1,6 @@
 import { useState, useContext, Fragment } from 'react'
 import { Switch, Disclosure, Menu, Transition } from '@headlessui/react'
-import { UserCircleIcon, SunIcon, MoonIcon } from '@heroicons/react/24/outline'
+import { UserCircleIcon, SunIcon, MoonIcon, Cog6ToothIcon } from '@heroicons/react/24/outline'
 import Logo from "../../assets/images/logo.png"
 import { Link, useLocation } from "react-router-dom"
 import { ThemeContext } from "../../context/theme";
@@ -45,13 +45,14 @@ const Appbar = () => {
               <div className="flex items-center">
                 <div className="flex items-center justify-center rounded-full h-10 w-10">
                     <button aria-pressed={isDark} onClick={toggleTheme}>
-                    {theme === 'light' ? <MoonIcon className="h-6 w-6" /> : <SunIcon className="h-6 w-6" />}
+                    {theme === 'light' ? <MoonIcon className="h-6 w-6 hover:text-blue-600" /> : <SunIcon className="h-6 w-6 hover:text-blue-600" />}
                     </button>
                 </div>
+                <Cog6ToothIcon className="h-7 w-7 text-black ml-2 hover:text-blue-600" aria-hidden="true" />
                 <Menu as="div" className="relative ml-3">
                   <div>
-                    <Menu.Button className="rounded-full bg-white p-1 text-gray-400 hover:text-blue-600">
-                      <UserCircleIcon className="h-10 w-10" aria-hidden="true" />
+                    <Menu.Button className="rounded-full bg-white p-1 text-black hover:text-blue-600">
+                      <UserCircleIcon className="h-8 w-8" aria-hidden="true" />
                     </Menu.Button>
                   </div>
                   <Transition
@@ -63,7 +64,7 @@ const Appbar = () => {
                     leaveFrom="transform opacity-100 scale-100"
                     leaveTo="transform opacity-0 scale-95"
                   >
-                    <Menu.Items className="absolute right-0 z-10 mt-2 w-48 origin-top-right rounded-md bg-white py-1 shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none">
+                    <Menu.Items className="absolute right-0 z-10 mt-2 w-40 origin-top-right rounded-md bg-white py-1 shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none">
                       {userNavigation.map((item) => (
                         <Menu.Item key={item.name}>
                           {({ active }) => (
