@@ -52,7 +52,7 @@ const ArticleListItems = () => {
       <Tab.Group>
         <Tab.List className="flex p-1 m-2 space-x-1 bg-blue-100 rounded-lg">
           {sports.map((sport) => (
-            <Tab key={sport} onClick={() => setSelectedSport(sport)} className={({ selected }) => `${selected ? 'bg-blue-900 text-white' : 'text-blue-900'} flex-1 py-2 px-4 text-center rounded-lg`}>
+            <Tab key={sport} onClick={() => setSelectedSport(sport)} className={({ selected }) => `${selected ? 'bg-white text-black' : 'text-blue-900'} flex-1 py-2 px-4 text-center rounded-lg`}>
               {sport}
             </Tab>
           ))}
