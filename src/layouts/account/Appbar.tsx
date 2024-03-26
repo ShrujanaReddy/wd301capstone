@@ -1,13 +1,11 @@
-import { useState, useContext, Fragment } from 'react'
+import { useState, useContext, Fragment, useEffect } from 'react'
 import { Switch, Disclosure, Menu, Transition } from '@headlessui/react'
 import { UserCircleIcon, SunIcon, MoonIcon, Cog6ToothIcon } from '@heroicons/react/24/outline'
 import Logo from "../../assets/images/logo.png"
 import { Link, useLocation } from "react-router-dom"
 import { ThemeContext } from "../../context/theme";
 
-const userNavigation = [
-  { name: 'Sign out', href: '/logout' },
-]
+
 
 const classNames = (...classes: string[]): string => classes.filter(Boolean).join(' ');
 
@@ -20,7 +18,16 @@ const Appbar = () => {
     const newTheme = theme === 'light' ? 'dark' : 'light';
     setTheme(newTheme);
   }
+  const [isUserSignedIn, setIsUserSignedIn] = useState(false);
 
+  useEffect(() => {
+    setIsUserSignedIn(!!localStorage.getItem('authToken'));
+  }, []);
+
+  const handleSignOut = () => {
+    localStorage.removeItem('authToken');
+    setIsUserSignedIn(false);
+  };
   return (
     <>
       <Disclosure as="nav" className="border-b border-slate-200">
@@ -48,7 +55,9 @@ const Appbar = () => {
                     {theme === 'light' ? <MoonIcon className="h-6 w-6 hover:text-blue-600" /> : <SunIcon className="h-6 w-6 hover:text-blue-600" />}
                     </button>
                 </div>
-                <Cog6ToothIcon className="h-7 w-7 text-black ml-2 hover:text-blue-600" aria-hidden="true" />
+                {isUserSignedIn && (
+                  <Cog6ToothIcon className="h-7 w-7 text-black ml-2 hover:text-blue-600" aria-hidden="true" />
+                )}
                 <Menu as="div" className="relative ml-3">
                   <div>
                     <Menu.Button className="rounded-full bg-white p-1 text-black hover:text-blue-600">
@@ -65,22 +74,37 @@ const Appbar = () => {
                     leaveTo="transform opacity-0 scale-95"
                   >
                     <Menu.Items className="absolute right-0 z-10 mt-2 w-40 origin-top-right rounded-md bg-white py-1 shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none">
-                      {userNavigation.map((item) => (
-                        <Menu.Item key={item.name}>
-                          {({ active }) => (
-                            <a
-                              href={item.href}
-                              className={classNames(
-                                active ? 'bg-gray-100' : '',
-                                'block px-4 py-2 text-sm text-gray-700'
-                              )}
-                            >
-                              {item.name}
-                            </a>
-                          )}
-                        </Menu.Item>
-                      ))}
-                    </Menu.Items>
+                    {isUserSignedIn ? (
+                      <Menu.Item>
+                        {({ active }) => (
+                          <a
+                            href="/logout"
+                            className={classNames(
+                              active ? 'bg-gray-100' : '',
+                              'block px-4 py-2 text-sm text-gray-700'
+                            )}
+                            onClick={handleSignOut}
+                          >
+                            Sign out
+                          </a>
+                        )}
+                      </Menu.Item>
+                    ) : (
+                      <Menu.Item>
+                        {({ active }) => (
+                          <a
+                            href="/signin"
+                            className={classNames(
+                              active ? 'bg-gray-100' : '',
+                              'block px-4 py-2 text-sm text-gray-700'
+                            )}
+                          >
+                            Sign in
+                          </a>
+                        )}
+                      </Menu.Item>
+                    )}
+                  </Menu.Items>
                   </Transition>
                 </Menu>
               </div>

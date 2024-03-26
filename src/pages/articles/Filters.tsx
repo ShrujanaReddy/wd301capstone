@@ -108,7 +108,7 @@ const Filters = () => {
                   <select
                     id="team"
                     name="team"
-                    className="block w-full py-2 px-3 border border-gray-300 bg-white rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
+                    className="block w-full py-2 px-3 mb-2 border border-gray-300 bg-white rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
                     value={selectedTeam || 'All'}
                     onChange={(e) => setSelectedTeam(e.target.value)}
                   >
