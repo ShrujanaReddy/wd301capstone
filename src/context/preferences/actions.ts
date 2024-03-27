@@ -8,7 +8,7 @@ export const fetchPreferences = async (dispatch: any, authToken: string) => {
       method: 'GET',
       headers: { 
         'Content-Type': 'application/json',
-        Authorization: `Bearer ${authToken}`,
+        Authorization: authToken,
       },
     });
 
@@ -31,7 +31,7 @@ export const updatePreferences = async (dispatch: any, newPreferences: Preferenc
       method: 'PATCH',
       headers: { 
         'Content-Type': 'application/json',
-        Authorization: `Bearer ${authToken}`,
+        Authorization: authToken,
       },
       body: JSON.stringify({ preferences: newPreferences }),
     });
@@ -42,6 +42,7 @@ export const updatePreferences = async (dispatch: any, newPreferences: Preferenc
 
     const data = await response.json();
     dispatch({ type: "UPDATE_PREFERENCES_SUCCESS", payload: data.preferences });
+    console.log(data.preferences)
   } catch (error) {
     console.error('Error updating preferences:', error);
     dispatch({ type: "UPDATE_PREFERENCES_FAILURE", payload: 'Unable to update preferences' });

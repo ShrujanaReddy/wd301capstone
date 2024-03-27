@@ -4,8 +4,7 @@ import { UserCircleIcon, SunIcon, MoonIcon, Cog6ToothIcon } from '@heroicons/rea
 import Logo from "../../assets/images/logo.png"
 import { Link, useLocation } from "react-router-dom"
 import { ThemeContext } from "../../context/theme";
-
-
+import Preferences from '../../pages/preferences';
 
 const classNames = (...classes: string[]): string => classes.filter(Boolean).join(' ');
 
@@ -28,6 +27,15 @@ const Appbar = () => {
     localStorage.removeItem('authToken');
     setIsUserSignedIn(false);
   };
+  const [isPreferencesOpen, setIsPreferencesOpen] = useState(false);
+  const openPreferences = () => {
+    setIsPreferencesOpen(true);
+  };
+
+  const closePreferences = () => {
+    setIsPreferencesOpen(false);
+  };
+
   return (
     <>
       <Disclosure as="nav" className="border-b border-slate-200">
@@ -56,7 +64,18 @@ const Appbar = () => {
                     </button>
                 </div>
                 {isUserSignedIn && (
-                  <Cog6ToothIcon className="h-7 w-7 text-black ml-2 hover:text-blue-600" aria-hidden="true" />
+                  <>
+                    <button onClick={openPreferences}>
+                      <Cog6ToothIcon className="h-7 w-7 text-black ml-2 hover:text-blue-600" aria-hidden="true" />
+                    </button>
+                    {isPreferencesOpen && (
+                      <div className="fixed inset-0 flex items-center justify-center bg-gray-800 bg-opacity-75">
+                        <div className="bg-white p-8 rounded-lg">
+                          <Preferences closeModal={closePreferences}/>
+                        </div>
+                      </div>
+                    )}
+                  </>
                 )}
                 <Menu as="div" className="relative ml-3">
                   <div>

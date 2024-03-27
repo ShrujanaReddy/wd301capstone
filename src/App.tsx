@@ -4,6 +4,7 @@ import router from "./routes"
 import { ThemeContext } from "./context/theme";
 import { MatchesProvider } from "./context/matches/context";
 import { ArticlesProvider } from "./context/articles/context";
+import { PreferencesProvider } from "./context/preferences/context";
 
 const App = () => {
   const { theme } = useContext(ThemeContext)
@@ -11,7 +12,9 @@ const App = () => {
     <div className={`h-full w-full mx-auto py-2 ${theme === "dark" ? "dark" : ""}`}>
       <ArticlesProvider>
         <MatchesProvider>
-        <RouterProvider router={router} />
+          <PreferencesProvider>            
+            <RouterProvider router={router} />
+          </PreferencesProvider>
       </MatchesProvider>
       </ArticlesProvider>
     </div>
