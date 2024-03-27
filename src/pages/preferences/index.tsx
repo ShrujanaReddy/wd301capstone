@@ -37,6 +37,7 @@ const Preferences: React.FC<{ closeModal: () => void }> = ({ closeModal }) => {
 
     const handleUpdatePreferences = () => {
         updatePreferences(dispatch, preferences, authToken); 
+        closeModal();
     };
 
     const handleCancel = () => {

@@ -42,7 +42,7 @@ export const updatePreferences = async (dispatch: any, newPreferences: Preferenc
 
     const data = await response.json();
     dispatch({ type: "UPDATE_PREFERENCES_SUCCESS", payload: data.preferences });
-    console.log(data.preferences)
+    //console.log(data.preferences)
   } catch (error) {
     console.error('Error updating preferences:', error);
     dispatch({ type: "UPDATE_PREFERENCES_FAILURE", payload: 'Unable to update preferences' });
