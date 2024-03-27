@@ -10,10 +10,8 @@ export interface Team {
 }
 
 export interface Preferences {
-  sports?: Sport[];
-  teams?: Team[];
-  articles?: number[];
-  matches?: number[];
+  sports?: string[];
+  teams?: string[];
 }
 
 export interface SetPreferences {
