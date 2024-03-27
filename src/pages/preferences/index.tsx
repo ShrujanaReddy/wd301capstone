@@ -1,3 +1,4 @@
+// Preferences component
 import React, { useEffect, useState } from 'react';
 import { usePreferencesDispatch, usePreferencesState } from '../../context/preferences/context';
 import { fetchPreferences, updatePreferences } from '../../context/preferences/actions';
@@ -40,7 +41,7 @@ const Preferences: React.FC<{ closeModal: () => void }> = ({ closeModal }) => {
     const state = usePreferencesState();
     const dispatch = usePreferencesDispatch();
     const authToken = localStorage.getItem('authToken') || '';
-    const [preferences, setPreferences] = useState(state.preferences || {});
+    const [preferences, setPreferences] = useState(state.preferences || { sports: [], teams: [] });
     const [selectedTeams, setSelectedTeams] = useState<string[]>([]);
     const [showModal, setShowModal] = useState(true);
 
@@ -54,13 +55,13 @@ const Preferences: React.FC<{ closeModal: () => void }> = ({ closeModal }) => {
 
     const handleCancel = () => {
         closeModal();
-        setPreferences(state.preferences || {});
+        setPreferences(state.preferences || { sports: [], teams: [] });
     };
 
     return(
         <>
         {showModal && (
-        <div className="fixed inset-0 flex items-center justify-center bg-gray-800 bg-opacity-75">
+        <div className="fixed inset-0 flex items-center justify-center bg-gray-800 bg-opacity-25">
           <div className="bg-white p-8 rounded-lg">
             <h2 className="text-lg font-bold mb-4">Select Teams</h2>
             <div className="grid grid-cols-3 gap-4">

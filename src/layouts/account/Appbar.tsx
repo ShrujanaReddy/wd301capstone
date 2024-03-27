@@ -1,5 +1,5 @@
 import { useState, useContext, Fragment, useEffect } from 'react'
-import { Switch, Disclosure, Menu, Transition } from '@headlessui/react'
+import { Switch, Disclosure, Menu, Transition, Dialog } from '@headlessui/react'
 import { UserCircleIcon, SunIcon, MoonIcon, Cog6ToothIcon } from '@heroicons/react/24/outline'
 import Logo from "../../assets/images/logo.png"
 import { Link, useLocation } from "react-router-dom"
@@ -67,13 +67,13 @@ const Appbar = () => {
                   <>
                     <button onClick={openPreferences}>
                       <Cog6ToothIcon className="h-7 w-7 text-black ml-2 hover:text-blue-600" aria-hidden="true" />
-                    </button>
+                    </button> 
                     {isPreferencesOpen && (
-                      <div className="fixed inset-0 flex items-center justify-center bg-gray-800 bg-opacity-75">
-                        <div className="bg-white p-8 rounded-lg">
-                          <Preferences closeModal={closePreferences}/>
-                        </div>
-                      </div>
+                      <Dialog open={isPreferencesOpen} onClose={closePreferences} className="fixed inset-0 z-50 overflow-y-auto bg-black bg-opacity-25">
+                        <Dialog.Panel className="flex items-center justify-center">
+                            <Preferences closeModal={closePreferences} />
+                        </Dialog.Panel>
+                      </Dialog>
                     )}
                   </>
                 )}
