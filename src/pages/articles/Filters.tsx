@@ -1,7 +1,8 @@
-import React, { Fragment, useState } from 'react';
+import React, { Fragment, useState, useContext } from 'react';
 import { Dialog, Transition } from '@headlessui/react';
 import { useArticlesState } from '../../context/articles/context';
 import { Article } from '../../context/articles/reducer';
+import { ThemeContext } from '../../context/theme';
 
 interface Props {
   article: Article;
@@ -48,7 +49,7 @@ const Filters = () => {
   const [selectedArticleId, setSelectedArticleId] = useState<number | undefined>(undefined);
   const [selectedSport, setSelectedSport] = useState<string | undefined>('All');
   const [selectedTeam, setSelectedTeam] = useState<string | undefined>('All');
-
+  const { theme } = useContext(ThemeContext);
   const getDetails = (articleId: number) => {
     const article = articleDetails[articleId];
     return article ? {
@@ -86,15 +87,15 @@ const Filters = () => {
 
   return (
     <>
-        <div className="flex-1 bg-gray-200">
-        <div className='text-xl font-bold mb-2 text-center'>Favourites</div>
+        <div className={`flex-1 ${theme === 'dark' ? 'bg-gray-800' : 'bg-gray-200'} rounded-xl`}>
+        <div className='text-xl font-bold mb-2 mt-2 text-center'>Favourites</div>
           <div className="flex flex-col gap-2">
-              <label className="block text-sm font-medium text-gray-700">Sport</label>
+              <label className={`block text-bold text-l ml-4 font-medium ${theme === 'dark' ? 'text-white' : 'text-gray-700'}`}>Sport</label>
               <select
                 id="sport"
                 name="sport"
-                className="block w-full py-2 px-3 border border-gray-300 bg-white rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
-                value={selectedSport || 'All'}
+                className={`block py-2 px-3 m-2 border border-gray-300 bg-white ${theme === 'dark' ? 'text-black' : 'text-gray-700' } rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
+                value={selectedSport || 'All'`}
                 onChange={(e) => setSelectedSport(e.target.value)}
               >
                 <option value="All">All</option>
@@ -104,11 +105,11 @@ const Filters = () => {
               </select>
               {selectedSport !== 'All' && (
                 <div>
-                  <label className="block text-sm font-medium text-gray-700 mb-2">Team</label>
+                  <label className="block text-l text-bold ml-4 font-medium text-gray-700 mb-2">Team</label>
                   <select
                     id="team"
                     name="team"
-                    className="block w-full py-2 px-3 mb-2 border border-gray-300 bg-white rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
+                    className="block m-2 py-2 px-3 border border-gray-300 bg-white rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
                     value={selectedTeam || 'All'}
                     onChange={(e) => setSelectedTeam(e.target.value)}
                   >
@@ -122,7 +123,7 @@ const Filters = () => {
             </div>
             <div className="flex flex-wrap gap-4 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4">
               {filteredArticles.map((article) => (
-                <FilteredArticleCard key={article.id} article={article} openModal={openModal} />
+                <FilteredArticleCard key={article.id} article={article} openModal={openModal} theme={theme}/>
               ))}
             </div>
         </div>
@@ -205,11 +206,11 @@ const Filters = () => {
 );
 };
 
-const FilteredArticleCard: React.FC<Props> = ({ article, openModal }) => (
+const FilteredArticleCard: React.FC<Props & { theme: string }> = ({ article, openModal, theme }) => (
   <div  
     key={article.id} 
     onClick={() => openModal(article.id)}
-    className="filtered-article flex p-4 bg-white border border-gray-200 m-2 rounded-lg shadow hover:bg-gray-100 dark:bg-gray-800 dark:border-gray-700 dark:hover:bg-gray-700 cursor-pointer"
+    className={`filtered-article flex p-4 bg-white border border-gray-200 m-2 rounded-lg shadow hover:bg-gray-100 ${theme === 'dark' ? 'dark:bg-gray-700 dark:border-gray-700 dark:hover:bg-gray-600' : ''} cursor-pointer`}
   >
     <div className="flex-1">
         <h5 className="text-l font-bold tracking-tight text-gray-800 dark:text-white">

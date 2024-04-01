@@ -50,7 +50,7 @@ const ArticleListItems = () => {
   return (
     <>
       <Tab.Group>
-        <Tab.List className="flex p-1 m-2 space-x-1 bg-blue-100 rounded-lg">
+        <Tab.List className="flex p-1 m-2 space-x-1 bg-blue-100 rounded-lg ">
           {sports.map((sport) => (
             <Tab key={sport} onClick={() => setSelectedSport(sport)} className={({ selected }) => `${selected ? 'bg-white text-black' : 'text-blue-900'} flex-1 py-2 px-4 text-center rounded-lg`}>
               {sport}
@@ -150,7 +150,7 @@ const ArticleCard: React.FC<Props> = ({ article, openModal }) => (
   <div  
     key={article.id} 
     onClick={() => openModal(article.id)}
-    className="article flex p-6 bg-white border border-gray-200 m-2 rounded-lg shadow hover:bg-gray-100 dark:bg-gray-800 dark:border-gray-700 dark:hover:bg-gray-700 cursor-pointer"
+    className="article flex p-6 bg-white border border-gray-200 m-2 rounded-lg shadow hover:bg-gray-100 dark:bg-gray-700 dark:border-gray-700 dark:hover:bg-gray-600 cursor-pointer"
   >
     <div className="flex-1">
       <h5 className="text-xl font-bold tracking-tight text-gray-800 dark:text-white">

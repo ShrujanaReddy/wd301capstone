@@ -3,6 +3,6 @@
 @import 'tailwindcss/utilities';
 
 .dark {
-  background-color: grey;
+  background-color: #121212;
   color: rgba(255, 255, 255, 0.87);
 }

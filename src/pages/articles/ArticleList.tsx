@@ -14,15 +14,15 @@ const ArticleList: React.FC = () => {
 
   return (
     <ErrorBoundary>
-      <div className="grid grid-cols-4 gap-4 mr-4">
-        <div className="col-span-3 bg-gray-200 rounded-2xl p-4">
+      <div className="grid grid-cols-4 gap-4 mr-4 ">
+        <div className="col-span-3 bg-gray-200 rounded-2xl p-4 dark:bg-gray-800 dark:border-gray-700">
           <Suspense fallback={<div className="suspense-loading">Loading...</div>}>
             <ArticleListItems/>
           </Suspense>
         </div>
-        <div className="bg-gray-200 rounded-2xl p-4">
+        {/* <div className="bg-gray-200 rounded-2xl p-4"> */}
           <Filters/>
-        </div>
+        {/* </div> */}
       </div>
     </ErrorBoundary>
   );
