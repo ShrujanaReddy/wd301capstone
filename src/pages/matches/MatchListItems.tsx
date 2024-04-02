@@ -64,7 +64,7 @@ const MatchListItems = () => {
               {match.sportName}
             </h5>
             <button
-              className="text-sm text-black bg-gray-200 hover:text-gray-800 dark:hover:text-black border border-gray-500 dark:border-gray-700 rounded-lg p-1 px-2 ml-2 hover:bg-white"
+              className="text-sm text-black bg-gray-200 hover:text-gray-800 border border-gray-500 dark:border-gray-700 rounded-lg p-1 px-2 ml-2 hover:bg-white"
               onClick={() => refreshScore(match.id)}
             >
               Refresh Score

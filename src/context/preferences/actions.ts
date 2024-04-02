@@ -10,13 +10,14 @@ export const fetchPreferences = async (dispatch: any, authToken: string) => {
         'Content-Type': 'application/json',
         Authorization: authToken,
       },
-    });
+    }); 
 
     if (!response.ok) {
       throw new Error('Failed to fetch preferences');
     }
 
     const data = await response.json();
+    //console.log(data.preferences)
     dispatch({ type: "FETCH_PREFERENCES_SUCCESS", payload: data.preferences });
   } catch (error) {
     console.error('Error fetching preferences:', error);
