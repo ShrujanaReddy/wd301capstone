@@ -19,7 +19,7 @@ const ArticleList: React.FC = () => {
 
   return (
     <ErrorBoundary>
-      <div className="grid grid-cols gap-4 overflow-x-scroll">
+      <div className="grid grid-cols gap-4">
           <Suspense fallback={<div className="suspense-loading">Loading...</div>}>
             <FavListItems/>
           </Suspense>

@@ -24,9 +24,18 @@ const FavListItems = () => {
     } : null;
   };
 
-  const filteredArticles = articles.filter((article) => {
-    return article.teams.some((team) => preferences?.teams?.includes(team.name));
-  });
+  const filteredArticles: Article[] = [];
+  const uniqueArticleIds = new Set<number>();
+  for (const articleId in articles) {
+    const article = articles[articleId];
+    if (!uniqueArticleIds.has(article.id)) {
+      const commonTeams = article.teams.filter(team => preferences?.teams?.includes(team.name));
+      if (commonTeams.length > 0) {
+        filteredArticles.push(article);
+        uniqueArticleIds.add(article.id);
+      }
+    }
+  }
   //console.log(filteredArticles)
   if (isLoading) {
     return <span>Loading...</span>;

@@ -29,7 +29,7 @@ const SigninForm: React.FC = () => {
       const responseData = await response.json();
       localStorage.setItem('authToken', responseData.auth_token);
       localStorage.setItem('userData', JSON.stringify(responseData.user));
-      console.log(responseData.user)
+      //console.log(responseData.user)
       navigate('/dashboard');
     } catch (error) {
       console.error('Sign-in failed:', error);
