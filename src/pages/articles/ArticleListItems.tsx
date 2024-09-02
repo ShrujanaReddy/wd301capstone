@@ -3,27 +3,30 @@ import { Dialog, Transition } from '@headlessui/react';
 import { Tab } from '@headlessui/react';
 import { useArticlesState } from '../../context/articles/context';
 import { Article } from '../../context/articles/reducer';
+import summarizeArticle from './gemini';
 
 interface Props {
   article: Article;
-  openModal: (id: number) => void;
+  openModal: (id: number, isSummary?: boolean) => void;
+  handleSummarize: (id: number) => void;
 }
 
 const sports = ["All", "Basketball", "Table Tennis", "American Football", "Cricket", "Field Hockey"];
-
+var summary: string="";
 const ArticleListItems = () => {
   const state = useArticlesState();
   const { articles, articleDetails, isLoading, isError, errorMessage } = state || {};
   const [isOpen, setIsOpen] = useState(false);
   const [selectedArticleId, setSelectedArticleId] = useState<number | undefined>(undefined);
   const [selectedSport, setSelectedSport] = useState<string | undefined>('All');
+  const [isSummary, setIsSummary] = useState(false);
 
   const getDetails = (articleId: number) => {
     const article = articleDetails[articleId];
     return article ? {
       title: article.title,
       thumbnail: article.thumbnail,
-      content: article.content
+      content: article.content ?? ""
     } : null;
   };
 
@@ -35,13 +38,26 @@ const ArticleListItems = () => {
     return <span>{errorMessage}</span>;
   }
 
-  const openModal = (articleid: number) => {
+  const handleSummarize = async (articleid: number) => {
+    try {
+      const details = getDetails(articleid);
+      summary = await summarizeArticle(details?.content ?? "");
+      setIsSummary(true);
+      openModal(articleid, true); // Open modal with summary
+    } catch (error) {
+      console.error("Failed to summarize article:", error);
+    }
+  };
+
+  const openModal = (articleid: number, isSummary = false) => {
     setSelectedArticleId(articleid);
+    setIsSummary(isSummary);
     setIsOpen(true);
   };
 
   const closeModal = () => {
     setIsOpen(false);
+    setIsSummary(false);
     setSelectedArticleId(undefined);
   };
 
@@ -61,7 +77,7 @@ const ArticleListItems = () => {
           {sports.map((sport) => (
             <Tab.Panel key={sport}>
               {articles.filter(article => sport === 'All' || article.sport.name === sport).map((article) => (
-                <ArticleCard key={article.id} article={article} openModal={openModal} />
+                <ArticleCard key={article.id} article={article} openModal={openModal} handleSummarize={handleSummarize} />
               ))}
             </Tab.Panel>
           ))}
@@ -126,7 +142,7 @@ const ArticleListItems = () => {
                       className="w-full h-auto mt-2 mb-4 rounded-lg"
                     />
                     <p className="text-sm text-gray-700 dark:text-gray-300">
-                      {selectedArticle?.content}
+                      {isSummary ? "Summary: " + summary : selectedArticle?.content}
                     </p>
                     <button
                       type="button"
@@ -146,7 +162,7 @@ const ArticleListItems = () => {
   );
 };
 
-const ArticleCard: React.FC<Props> = ({ article, openModal }) => (
+const ArticleCard: React.FC<Props> = ({ article, openModal, handleSummarize }) => (
   <div  
     key={article.id} 
     onClick={() => openModal(article.id)}
@@ -161,10 +177,23 @@ const ArticleCard: React.FC<Props> = ({ article, openModal }) => (
       </p>
       <button
         type="button"
-        onClick={() =>openModal(article.id)}
-        className="mt-auto inline-flex justify-center rounded-md border border-transparent bg-blue-100 px-4 py-2 text-sm font-medium text-blue-900 hover:bg-blue-200 focus:outline-none focus-visible:ring-2 focus-visible:ring-blue-500 focus-visible:ring-offset-2"
+        onClick={(e) => {
+          e.stopPropagation();
+          openModal(article.id);
+        }}
+        className="mt-auto inline-flex justify-center rounded-md border border-transparent bg-blue-100 px-4 py-2 mr-4 text-sm font-medium text-blue-900 hover:bg-blue-200 focus:outline-none focus-visible:ring-2 focus-visible:ring-blue-500 focus-visible:ring-offset-2"
       >
         Read More
+      </button>
+      <button
+        type="button"
+        onClick={(e) => {
+          e.stopPropagation();
+          handleSummarize(article.id);
+        }}
+        className="mt-auto inline-flex justify-center rounded-md border border-transparent bg-blue-100 px-4 py-2 text-sm font-medium text-blue-900 hover:bg-blue-200 focus:outline-none focus-visible:ring-2 focus-visible:ring-blue-500 focus-visible:ring-offset-2"
+      >
+        Summarize
       </button>
     </div>
     <div className="flex-none w-1/3 pl-4">
