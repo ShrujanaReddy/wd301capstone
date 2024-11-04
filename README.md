@@ -20,13 +20,15 @@ Live Link : https://shrujanawd301.netlify.app/
 - Create an account and sign in
 - Customize dashboard preferences
 - Receive tailored news and score updates based on preferences
+
+![Screenshot 2024-11-04 193654](https://github.com/user-attachments/assets/9df072a5-9ed5-4502-b8ca-13bc6ccecef7)
 ![Screenshot 2024-11-04 193858](https://github.com/user-attachments/assets/5ad21af7-0d07-491f-a66e-534b2c069eef)
 ![Screenshot 2024-11-04 193839](https://github.com/user-attachments/assets/38bb3691-a567-486f-97bd-39f97e1eb29c)
 ![Screenshot 2024-11-04 193812](https://github.com/user-attachments/assets/4bb84a0c-c333-4b97-8126-519eece71bb3)
 ![Screenshot 2024-11-04 193735](https://github.com/user-attachments/assets/3dedaab0-85ed-4c84-b24e-410324fbd90f)
 ![Screenshot 2024-11-04 193722](https://github.com/user-attachments/assets/74c8c1d6-b580-4ba2-9210-909c0849892a)
 ![Screenshot 2024-11-04 193710](https://github.com/user-attachments/assets/38f8b9a5-5087-4b6d-9878-9331c46c8a32)
-![Screenshot 2024-11-04 193654](https://github.com/user-attachments/assets/9df072a5-9ed5-4502-b8ca-13bc6ccecef7)
+
 
 
 
