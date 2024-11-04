@@ -1,6 +1,6 @@
 # Sports News and Live Scores App
 
-This is a Progressive Web Application (PWA) built with TypeScript and React. The app allows users to browse sports news, view live scores and match details, and personalize their dashboard with favorite sports and teams.
+This is a Progressive Web Application (PWA) built with TypeScript and React. The app allows users to browse sports news, view live scores and match details, and personalize their dashboard with favorite sports and teams. News articles can be summarized to save time. (Used Gemini API to build this feature)
 
 Live Link : https://shrujanawd301.netlify.app/
 
